@@ -4,7 +4,7 @@ Package for texts similarity, based on [textdistance](https://pypi.org/project/t
 # Usage
 1. installation
   ```
-  !pip install git+https://github.com/leoxiang66/texts-similarity.git
+  !pip install git+https://github.com/leoxiang66/text-similarity.git
   ```
 2. example usage:
   ```python
