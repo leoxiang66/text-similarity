@@ -1,4 +1,4 @@
-# texts-similarity
+# Text-Similarity
 Package for texts similarity, based on [textdistance](https://pypi.org/project/textdistance/)
 
 # Usage
