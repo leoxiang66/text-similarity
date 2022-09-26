@@ -1,8 +1,52 @@
 import textdistance as td
 import numpy as np
 
-class TextSimilarityAlgo:
+
+class BaseTextSimilarity:
     def __init__(self):
+        self._current_algo = None
+        self.__setup__()
+
+    def __create_one2many__(self, dist_func):
+        def new_func(mention, candidates: list):
+            f = lambda candidate: dist_func(mention, candidate)
+            return np.array(list(map(f, candidates)))
+
+        return new_func
+
+    def __setup__(self):
+        '''
+        set $self._current_algo$ to a certain defaut distance function
+        :return:
+        '''
+        raise NotImplementedError
+
+    def compute_similarity(self, a, b):
+        if self._current_algo is None:
+            self.__setup__()
+
+        return self._current_algo(a, b)
+
+    def top_K_similarity_between_one_mention_and_many_candidates(self, k: int, mention, candidates: list):
+        if self._current_algo is None:
+            self.__setup__()
+
+        algo_one2many = self.__create_one2many__(self._current_algo)
+
+        similarities = algo_one2many(mention, candidates)
+        ids = np.argpartition(similarities, -k)[-k:]
+
+        result = [candidates[a] for a in ids]
+        f = lambda x: self._current_algo(mention, x)
+        return sorted(result, key=f, reverse=True)
+
+
+class TextSimilarityAlgo(BaseTextSimilarity):
+    def __setup__(self):
+        self._current_algo = td.jaccard
+
+    def __init__(self):
+        super().__init__()
         self._all_algos = {
             'hamming': td.hamming,
             'mlipns': td.mlipns,
@@ -38,37 +82,15 @@ class TextSimilarityAlgo:
 
         }
 
-        self._current_algo = td.jaccard
-
     def print_all_algorithms(self):
         print(list(self._all_algos.keys()))
         print(f'Current algorithm is {self._current_algo}')
 
-
-    def change_algorithm(self,algorithm:str):
+    def change_algorithm(self, algorithm: str):
         if algorithm in self._all_algos.keys():
             self._current_algo = self._all_algos[algorithm]
         else:
             raise NotImplementedError('This algorithm is not implemented yet.')
 
-    def compute_similarity(self, text1, text2 ):
-        return self._current_algo(text1,text2)
-
-    def _create_one2many(self,dist_func):
-        def new_func(mention, candidates: list):
-            f = lambda candidate: dist_func(mention, candidate)
-            return np.array(list(map(f, candidates)))
-
-        return new_func
-
-    def top_K_similarity_between_one_mention_and_many_candidates(self,k:int, mention, candidates:list):
-        algo_one2many = self._create_one2many(self._current_algo)
-
-        similarities = algo_one2many(mention, candidates)
-        ids = np.argpartition(similarities, -k)[-k:]
-
-        result = [candidates[a] for a in ids]
-        f = lambda x: td.jaccard(mention, x)
-        return sorted(result, key=f, reverse=True)
 
 tsalgo = TextSimilarityAlgo()
