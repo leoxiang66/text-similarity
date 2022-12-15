@@ -1,4 +1,6 @@
-numpy==1.23.3
-setuptools==58.1.0
-textdistance==4.5.0
+numpy
+textdistance
 torch==1.12.1
+scikit-learn
+sparse_dot_topn
+pandas
