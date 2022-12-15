@@ -1,9 +1,8 @@
 from typing import  List
 from sklearn.feature_extraction.text import TfidfVectorizer
+from sparse_dot_topn import awesome_cossim_topn
+import pandas as pd
 
-
-
-from ._comp import cossim_topN, get_matches_df
 
 def tfidf_sim_pipeline(
         corpus_a: List[str],
@@ -20,6 +19,7 @@ def tfidf_sim_pipeline(
     :param corpus_b: list[str], M samples
     :return:
     '''
+    assert top_k_similarity < min(len(corpus_a),len(corpus_b))
 
     corpora = corpus_a + corpus_b
     vectorizer = TfidfVectorizer()
@@ -29,6 +29,19 @@ def tfidf_sim_pipeline(
     m2 = temp[len(corpus_a):] # M,D
 
 
-    matches = cossim_topN(m1,m2.transpose(),top_k_similarity, similarity_lower_bound) # todo: debug
-    return matches
+    sim = awesome_cossim_topn(m1,m2.transpose(),top_k_similarity, similarity_lower_bound) # NxM
+    nonzero_x , nonzero_y = sim.nonzero()
+    data = []
+    columns = ["Text"]
+    for j in range(top_k_similarity):
+        columns.append(f"Top-{j+1} Similarity")
+
+    for i in range(len(corpus_a)):
+        tmp = [corpus_a[i]]
+        for j in range(top_k_similarity):
+            tmp.append(corpus_b[nonzero_y[i*top_k_similarity+j]])
+        data.append(tmp)
+
+
+    return pd.DataFrame(data, columns=columns)
 

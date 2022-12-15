@@ -15,5 +15,5 @@ if __name__ == '__main__':
         'Is this the first document? and yes whyand yes why',
     ]
 
-    matches = tfidf.tfidf_sim_pipeline(ca, cb, 3)
+    matches = tfidf.tfidf_sim_pipeline(ca, cb, 2)
     print(matches)
