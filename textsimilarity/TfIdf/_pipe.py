@@ -40,10 +40,11 @@ def tfidf_sim_pipeline(
         columns.append(f"Top-{j+1} Similarity")
 
     for i,j in zip(nonzero_x,nonzero_y):
-        data[i].append(corpus_b[j])
+        if return_indices:
+            data[i].append((corpus_b[j],int(j)))
+        else:
+            data[i].append(corpus_b[j])
 
     ret = pd.DataFrame(data, columns=columns)
-    if return_indices:
-        return ret,nonzero_y
     return ret
 
