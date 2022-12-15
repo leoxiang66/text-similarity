@@ -6,7 +6,7 @@ with open("README.md", "r") as readme_file:
 requirements = [
     "textdistance",
     'numpy',
-    'torch'
+    'torch',
     'scikit-learn',
     'sparse_dot_topn',
     'pandas'
