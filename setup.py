@@ -3,11 +3,18 @@ from setuptools import setup, find_packages
 with open("README.md", "r") as readme_file:
     readme = readme_file.read()
 
-requirements = ["textdistance",'numpy']
+requirements = [
+    "textdistance",
+    'numpy',
+    'torch==1.12.1'
+    'scikit-learn',
+    'sparse_dot_topn',
+    'pandas'
+]
 
 setup(
     name="textsimilarity",
-    version="0.3.0",
+    version="0.3.1",
     author="Tao Xiang",
     author_email="tao.xiang@tum.de",
     description="A package for text similarity",
