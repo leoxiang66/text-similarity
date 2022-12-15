@@ -13,7 +13,7 @@ requirements = [
 ]
 
 setup(
-    name="textsimilarity",
+    name="textsimi",
     version="0.3.5",
     author="Tao Xiang",
     author_email="tao.xiang@tum.de",
