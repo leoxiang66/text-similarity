@@ -29,6 +29,6 @@ def tfidf_sim_pipeline(
     m2 = temp[len(corpus_a):] # M,D
 
 
-    matches = cossim_topN(m1,m2.transpose(),top_k_similarity, similarity_lower_bound)
+    matches = cossim_topN(m1,m2.transpose(),top_k_similarity, similarity_lower_bound) # todo: debug
     return matches
 
