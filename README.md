@@ -4,7 +4,7 @@ Package for texts similarity, based on [textdistance](https://pypi.org/project/t
 # Usage
 1. installation
   ```
-  !pip install textsimi
+  pip install textsimi
   ```
 2. example usage:
   ```python
