@@ -1,4 +1,4 @@
-import textsimilarity.TfIdf as tfidf
+import textsimi.TfIdf as tfidf
 
 if __name__ == '__main__':
     ca = [

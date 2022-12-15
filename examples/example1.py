@@ -1,10 +1,10 @@
 if __name__ == '__main__':
-    from textsimilarity import textsimilarity
+    from textsimi import textsimilarity
 
     print(textsimilarity.compute_similarity('hello','hi'))
     print(textsimilarity.top_K_similarity_between_one_mention_and_many_candidates(2,'hello',['hi','hihi','have fun','hey']))
 
-    from textsimilarity import textsimilarity_model_based
+    from textsimi import textsimilarity_model_based
     import numpy as np
 
     a = np.array([0.5,0.5])
