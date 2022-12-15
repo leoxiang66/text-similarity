@@ -14,7 +14,7 @@ requirements = [
 
 setup(
     name="textsimilarity",
-    version="0.3.2",
+    version="0.3.3",
     author="Tao Xiang",
     author_email="tao.xiang@tum.de",
     description="A package for text similarity",
