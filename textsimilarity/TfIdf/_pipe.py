@@ -42,6 +42,6 @@ def tfidf_sim_pipeline(
             tmp.append(corpus_b[nonzero_y[i*top_k_similarity+j]])
         data.append(tmp)
 
-
-    return pd.DataFrame(data, columns=columns)
+    ret = pd.DataFrame(data, columns=columns)
+    return ret
 
