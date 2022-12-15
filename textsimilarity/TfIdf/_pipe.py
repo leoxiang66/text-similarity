@@ -9,7 +9,8 @@ def tfidf_sim_pipeline(
         corpus_a: List[str],
         corpus_b: List[str],
         top_k_similarity: int = 3,
-        similarity_lower_bound: float = 0.
+        similarity_lower_bound: float = 0.,
+        return_indices = False
 ):
     '''
     pipe to compute tfidf similarity of given two corpora
@@ -18,6 +19,7 @@ def tfidf_sim_pipeline(
     :param top_k_similarity:
     :param corpus_a: list[str], N samples
     :param corpus_b: list[str], M samples
+    :param return_indices: whether to return the indicies of matched texts in corpus_b
     :return:
     '''
     assert top_k_similarity < min(len(corpus_a),len(corpus_b))
@@ -41,5 +43,7 @@ def tfidf_sim_pipeline(
         data[i].append(corpus_b[j])
 
     ret = pd.DataFrame(data, columns=columns)
+    if return_indices:
+        return ret,nonzero_y
     return ret
 
