@@ -2,7 +2,7 @@ from typing import  List
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sparse_dot_topn import awesome_cossim_topn
 import pandas as pd
-import string
+
 
 
 def tfidf_sim_pipeline(
