@@ -6,7 +6,7 @@ with open("README.md", "r") as readme_file:
 requirements = [
     "textdistance",
     'numpy',
-    'torch==1.12.0',
+    'torch',
     'scikit-learn',
     'sparse_dot_topn',
     'pandas'
@@ -14,7 +14,7 @@ requirements = [
 
 setup(
     name="textsimi",
-    version="0.4.1",
+    version="0.4.2",
     author="Tao Xiang",
     author_email="tao.xiang@tum.de",
     description="A package for text similarity",
